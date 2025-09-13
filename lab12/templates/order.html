@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ</title>
+    <link rel="stylesheet" href="/resources/styles/common.css">
+    <link rel="stylesheet" href="/resources/styles/order.css">
+</head>
+<body>
+    <div class="site-header">
+        <div class="header-left">
+            <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+        </div>
+        <div class="header-right">
+            <a href="/">
+                <img src="http://127.0.0.1:9000/manuscripts/icons8-назад-64.png" alt="Назад" class="icon-back">
+            </a>
+        </div>
+    </div>
+
+    <div class="order-container">
+        <!-- Левая часть -->
+        <div class="order-left">
+            {{if .}}
+            {{range .}}
+            <div class="order-card">
+                <div class="order-info">
+                    <img src="{{.ImageURL}}" alt="{{.Name}}">
+                    <div class="order-text">
+                        <h3>{{.Name}}</h3>
+                        <p>{{.Description}}</p>
+                    </div>
+                </div>
+                <a href="/order/delete?id={{.ID}}">
+                    <button class="delete-btn">
+                        <img src="http://127.0.0.1:9000/manuscripts/icons8-мусорка-50.png" alt="Удалить" class="delete-icon">
+                    </button>
+                </a>
+            </div>
+            {{end}}
+            {{else}}
+                <div class="order-empty" style="width: 1000px; padding: 20px; color: #B6BCBF;">
+                Корзина пуста
+                </div>
+            {{end}}
+        </div>
+
+        <!-- Правая часть -->
+        <div class="order-right">
+            <h2>Возможный период написания:</h2>
+            <button class="calc-btn">Посчитать</button>
+        </div>
+    </div>
+</body>
+</html>
