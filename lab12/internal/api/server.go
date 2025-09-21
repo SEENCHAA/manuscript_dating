@@ -27,17 +27,17 @@ func StartServer() {
 	// Раздаём статику
 	r.Static("/resources", "./resources")
 
-	// Маршруты
-	r.GET("/", h.GetFeatures)
-	r.POST("/", h.GetFeatures)
+	// ====== Маршруты ======
+	// список признаков
+	r.GET("/", h.GetSigns)
 
-	r.GET("/feature/:id", h.GetFeature)  // правильный маршрут
-	r.POST("/feature/:id", h.GetFeature) // POST тоже работает
+	// один признак
+	r.GET("/sign/:id", h.GetSign)
 
-	r.GET("/order", h.Order)
-	r.GET("/order/delete", h.Delete)
+	// подборка (рукопись)
+	r.GET("/manuscript", h.GetManuscript)
 
-	// Выводим все зарегистрированные маршруты для проверки
+	// Лог всех маршрутов
 	for _, ri := range r.Routes() {
 		log.Printf("Route: %s %s\n", ri.Method, ri.Path)
 	}

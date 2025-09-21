@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// Feature — структура для одного признака
+// Feature — структура для одной буквы/признака
 type Feature struct {
 	ID          int
 	Name        string
@@ -14,13 +14,14 @@ type Feature struct {
 	Period      string
 	Details     string
 	ImageURL    string
+	Count       int
 }
 
 type Repository struct {
-	Order []Feature
+	Manuscript []Feature // вместо Order теперь "Рукопись"
 }
 
-// Список признаков
+// Список признаков (буквы, особенности орфографии)
 var Features = []Feature{
 	{
 		ID:          1,
@@ -64,12 +65,27 @@ var Features = []Feature{
 	},
 }
 
+// Создание нового репозитория с предустановленной рукописью
 func NewRepository() (*Repository, error) {
+	initialManuscript := []Feature{}
+	if len(Features) >= 2 {
+		// Первый признак с количеством 2
+		f1 := Features[0]
+		f1.Count = 2
+		initialManuscript = append(initialManuscript, f1)
+
+		// Второй признак с количеством 1
+		f2 := Features[1]
+		f2.Count = 1
+		initialManuscript = append(initialManuscript, f2)
+	}
+
 	return &Repository{
-		Order: []Feature{},
+		Manuscript: initialManuscript,
 	}, nil
 }
 
+// Получить все признаки
 func (r *Repository) GetFeatures() ([]Feature, error) {
 	if len(Features) == 0 {
 		return nil, fmt.Errorf("массив пустой")
@@ -77,28 +93,26 @@ func (r *Repository) GetFeatures() ([]Feature, error) {
 	return Features, nil
 }
 
+// Получить один признак
 func (r *Repository) GetFeature(id int) (Feature, error) {
 	features, err := r.GetFeatures()
 	if err != nil {
 		return Feature{}, err
 	}
-
 	for _, f := range features {
 		if f.ID == id {
 			return f, nil
 		}
 	}
-
-	return Feature{}, errors.New("not found")
-
+	return Feature{}, errors.New("не найдено")
 }
 
+// Поиск по признакам
 func (r *Repository) SearchFeatures(query string) ([]Feature, error) {
 	features, err := r.GetFeatures()
 	if err != nil {
 		return []Feature{}, err
 	}
-
 	var result []Feature
 	queryLower := strings.ToLower(query)
 	for _, f := range features {
@@ -106,37 +120,48 @@ func (r *Repository) SearchFeatures(query string) ([]Feature, error) {
 			result = append(result, f)
 		}
 	}
-
 	return result, nil
 }
 
-func (r *Repository) AddToOrder(id int) error {
+// Добавить признак в рукопись
+func (r *Repository) AddToManuscript(id int) error {
 	feature, err := r.GetFeature(id)
 	if err != nil {
 		return err
 	}
 
-	// Проверяем, нет ли уже в заказе (чтобы избежать дубликатов)
-	for _, existing := range r.Order {
-		if existing.ID == id {
-			return nil // Уже есть
+	for i := range r.Manuscript {
+		if r.Manuscript[i].ID == id {
+			r.Manuscript[i].Count++ // увеличиваем количество
+			return nil
 		}
 	}
 
-	r.Order = append(r.Order, feature)
+	feature.Count = 1 // первый раз
+	r.Manuscript = append(r.Manuscript, feature)
 	return nil
 }
 
-func (r *Repository) RemoveFromOrder(id int) {
-	var newOrder []Feature
-	for _, f := range r.Order {
-		if f.ID != id {
-			newOrder = append(newOrder, f)
+// Обновить количество признака в рукописи
+func (r *Repository) UpdateManuscriptCount(id int, count int) {
+	for i := range r.Manuscript {
+		if r.Manuscript[i].ID == id {
+			r.Manuscript[i].Count = count
+			return
 		}
 	}
-	r.Order = newOrder
 }
 
-func (r *Repository) GetOrder() []Feature {
-	return r.Order
+// Получить всю рукопись
+func (r *Repository) GetManuscript() []Feature {
+	return r.Manuscript
+}
+
+// Получить общее количество признаков в рукописи
+func (r *Repository) GetTotalManuscriptCount() int {
+	total := 0
+	for _, f := range r.Manuscript {
+		total += f.Count
+	}
+	return total
 }

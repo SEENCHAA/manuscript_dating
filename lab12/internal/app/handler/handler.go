@@ -17,55 +17,41 @@ func NewHandler(repo *repository.Repository) *Handler {
 	return &Handler{repo: repo}
 }
 
-func (h *Handler) GetFeatures(c *gin.Context) {
-	var featuresToShow []repository.Feature
+// ====== Список признаков ======
+func (h *Handler) GetSigns(c *gin.Context) {
+	var signsToShow []repository.Feature
 
-	// Обработка поиска
+	// Поиск
 	query := c.Query("search")
 	if query != "" {
-		featuresToShow, _ = h.repo.SearchFeatures(query)
+		signsToShow, _ = h.repo.SearchFeatures(query)
 	} else {
-		featuresToShow, _ = h.repo.GetFeatures()
+		signsToShow, _ = h.repo.GetFeatures()
 	}
 
-	// Обработка добавления в заказ (только если POST)
-	if c.Request.Method == "POST" {
-		idStr := c.PostForm("id")
-		if idStr != "" {
-			id, _ := strconv.Atoi(idStr)
-			h.repo.AddToOrder(id)
-		}
+	data := gin.H{
+		"Signs":      signsToShow,
+		"TotalCount": h.repo.GetTotalManuscriptCount(),
 	}
 
-	c.HTML(http.StatusOK, "index.html", featuresToShow)
+	c.HTML(http.StatusOK, "signs.html", data)
 }
 
-func (h *Handler) GetFeature(c *gin.Context) {
+// ====== Один признак ======
+func (h *Handler) GetSign(c *gin.Context) {
 	idStr := c.Param("id")
 	id, _ := strconv.Atoi(idStr)
-
 	selected, _ := h.repo.GetFeature(id)
 
-	// Добавление в заказ
-	if c.Request.Method == "POST" {
-		h.repo.AddToOrder(id)
-		c.Redirect(http.StatusSeeOther, "/order")
-		return
+	c.HTML(http.StatusOK, "sign.html", selected)
+}
+
+// ====== Рукопись ======
+func (h *Handler) GetManuscript(c *gin.Context) {
+	manuscript := h.repo.GetManuscript()
+	data := gin.H{
+		"Signs":      manuscript,
+		"TotalCount": h.repo.GetTotalManuscriptCount(),
 	}
-
-	c.HTML(http.StatusOK, "detail.html", selected)
-}
-
-func (h *Handler) Order(c *gin.Context) {
-	order := h.repo.GetOrder()
-	c.HTML(http.StatusOK, "order.html", order)
-}
-
-func (h *Handler) Delete(c *gin.Context) {
-	idStr := c.Query("id")
-	id, _ := strconv.Atoi(idStr)
-
-	h.repo.RemoveFromOrder(id)
-
-	c.Redirect(http.StatusSeeOther, "/order")
+	c.HTML(http.StatusOK, "manuscript.html", data)
 }
