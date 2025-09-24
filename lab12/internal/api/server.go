@@ -35,7 +35,7 @@ func StartServer() {
 	r.GET("/sign/:id", h.GetSign)
 
 	// подборка (рукопись)
-	r.GET("/manuscript", h.GetManuscript)
+	r.GET("/manuscripts/:id", h.GetManuscript)
 
 	// Лог всех маршрутов
 	for _, ri := range r.Routes() {

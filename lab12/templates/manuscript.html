@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Рукопись</title>
     <link rel="stylesheet" href="/resources/styles/common.css">
-    <link rel="stylesheet" href="/resources/styles/order.css">
+    <link rel="stylesheet" href="/resources/styles/manuscript.css">
 </head>
 <body>
     <!-- Хедер -->
@@ -26,6 +26,14 @@
 
     <!-- Контейнер -->
     <div class="order-container">
+
+        <div class="order-period">
+            <h2>Возможный период написания:</h2>
+            <!--<button class="calc-btn">Посчитать</button>-->
+        </div>
+
+
+
         {{if .Signs}}
             {{range .Signs}}
             <div class="order-card">

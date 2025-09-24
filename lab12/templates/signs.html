@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Признаки</title>
     <link rel="stylesheet" href="/resources/styles/common.css">
-    <link rel="stylesheet" href="/resources/styles/index.css">
+    <link rel="stylesheet" href="/resources/styles/signs.css">
 </head>
 <body>
     <!-- Хедер (только логотип) -->
@@ -18,10 +18,10 @@
     <div class="title-row">
         <h1>Список признаков</h1>
         <div class="title-controls">
-            <form method="GET" action="/signs" id="search-form">
+            <form method="GET" action="/" id="search-form">
                 <input type="text" class="search-input" name="search" placeholder="Поиск..." id="search-input">
             </form>
-            <a href="/manuscript" class="order-link">
+            <a href="/manuscripts/1" class="order-link">
                 <img src="http://127.0.0.1:9000/manuscripts/icons8-матрешка-48.png" alt="Матрешка" class="order-icon">
                 {{if gt .TotalCount 0}}
                 <span class="order-count">{{.TotalCount}}</span>
