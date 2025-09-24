@@ -29,7 +29,6 @@ func (h *Handler) GetSigns(c *gin.Context) {
 		signsToShow, _ = h.repo.GetFeatures()
 	}
 
-	// ⚡ Важно: теперь нужно указать ID рукописи
 	total := h.repo.GetTotalManuscriptCount(1) // пока фиксированно 1
 
 	data := gin.H{
