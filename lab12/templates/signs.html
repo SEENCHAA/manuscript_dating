@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Признаки</title>
+    <link rel="stylesheet" href="/resources/styles/common.css">
+    <link rel="stylesheet" href="/resources/styles/signs.css">
+</head>
+<body>
+    <!-- Хедер (только логотип) -->
+    <div class="site-header">
+        <div class="header-left">
+            <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+        </div>
+    </div>
+
+    <!-- Строка с заголовком, поиском и иконкой -->
+    <div class="title-row">
+        <h1>Список признаков</h1>
+        <div class="title-controls">
+            <form method="GET" action="/" id="search-form">
+                <input type="text" class="search-input" name="record" placeholder="Поиск..." id="search-input">
+            </form>
+            <a href="/manuscripts/1" class="order-link">
+                <img src="http://127.0.0.1:9000/manuscripts/icons8-матрешка-48.png" alt="Матрешка" class="order-icon">
+                {{if gt .TotalCount 0}}
+                <span class="order-count">{{.TotalCount}}</span>
+                {{end}}
+            </a>
+        </div>
+    </div>
+
+    <!-- Карточки -->
+    <div class="grid">
+        {{range .Signs}}
+        <div class="card">
+            <div class="card-left">
+                <h3 class="card-title">{{.Name}}</h3>
+                <p class="card-text">{{.Description}}</p>
+                <div class="card-actions">
+                    <a href="/sign/{{.ID}}" class="card-detail">Подробнее</a>
+                </div>
+            </div>
+            <div class="card-right">
+                <img src="{{.ImageURL}}" alt="{{.Name}}">
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Рукопись</title>
+    <link rel="stylesheet" href="/resources/styles/common.css">
+    <link rel="stylesheet" href="/resources/styles/manuscript.css">
+</head>
+<body>
+    <!-- Хедер -->
+    <div class="site-header">
+        <div class="header-left">
+            <a href="/">
+                <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Заголовок и кнопка "Назад" -->
+    <div class="title-row">
+        <h1>Ваша рукопись</h1>
+    </div>
+
+    <!-- Контейнер -->
+    <div class="order-container">
+
+        <div class="order-period">
+            <h2>Возможный период написания: 1600–1700 гг</h2>
+            <!--<button class="calc-btn">Посчитать</button>-->
+        </div>
+
+
+
+        {{if .Signs}}
+            {{range .Signs}}
+            <div class="order-card">
+                <div class="order-info">
+                    <img src="{{.ImageURL}}" alt="{{.Name}}">
+                    <div class="order-text">
+                        <h3>{{.Name}}</h3>
+                        <p>{{.Description}}</p>
+                    </div>
+                </div>
+                <div class="count-form">
+                    Количество: {{.Count}}
+                </div>
+            </div>
+            {{end}}
+        {{else}}
+            <div class="order-empty" style="width: 1400px; padding: 20px; color: #B6BCBF;">
+                Рукопись пуста
+            </div>
+        {{end}}
+    </div>
+
+    
+</body>
+</html>

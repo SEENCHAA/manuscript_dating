@@ -1,0 +1,90 @@
+/* ====== Сетка карточек ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 690px);
+    justify-content: center;
+    gap: 100px 70px;
+    margin: 50px 180px;
+}
+
+/* ====== Карточка ====== */
+.card {
+    display: flex;
+    background: #1D1D1D;
+    width: 690px;
+    height: 430px;
+    overflow: hidden;
+}
+
+.card-left {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 42px;
+    color: #FFFFFF;
+    margin: 0 0 5px;
+}
+
+.card-text {
+    font-size: 32px;
+    color: #B6BCBF;
+    flex-grow: 1;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* отступ между кнопками */
+    margin-top: auto;
+}
+
+.card-detail {
+    font-size: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* Кнопка "Добавить" */
+button.card-add {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    border: none;
+    background: #B6BCBF;
+    color: #000;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+button.card-add:hover {
+    transform: scale(1.1);
+}
+
+/* Правая часть карточки */
+.card-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Name}}</title>
+    <link rel="stylesheet" href="/resources/styles/common.css">
+    <link rel="stylesheet" href="/resources/styles/sign.css">
+</head>
+<body>
+    <!-- Хедер -->
+    <div class="site-header">
+        <div class="header-left">
+            <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+        </div>
+    </div>
+
+    <!-- Заголовок + кнопка назад -->
+    <div class="title-row center">
+        <h1>{{.Name}}</h1>
+        <div class="title-controls">
+            <a href="/">
+                <img src="http://127.0.0.1:9000/manuscripts/icons8-назад-64.png" alt="Назад" class="icon-back">
+            </a>
+        </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="detail-container">
+        <div class="detail-left">
+            <img src="{{.ImageURL}}" alt="{{.Name}}" class="detail-image">
+        </div>
+        <div class="detail-right">
+            <p class="detail-text">{{.Details}}</p>
+            <p><b>Период использования:</b> {{.Period}}</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* ====== Общие стили ====== */
+body {
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 120px; 
+}
+
+a {
+    color: #5a5b3b;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f2d70a;
+    text-decoration: underline;
+}
+
+button,
+input[type="submit"] {
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #444;
+}
+
+/* ====== Хедер ====== */
+.site-header {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    padding: 10px 35px;
+    height: 120px;
+
+    position: fixed;   /* фиксируем хедер */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 0.5px;
+    background-color: white;
+}
+
+/* Логотип */
+.logo {
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ====== Строка заголовка ====== */
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* по умолчанию: заголовок слева, контролы справа */
+    margin: 20px 45px;
+    position: relative;
+}
+
+.title-row h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Блок с контролами (поиск, иконки, кнопка назад) */
+.title-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Вариант для detail — заголовок по центру */
+.title-row.center {
+    justify-content: center; /* текст в центре */
+}
+
+.title-row.center h1 {
+    text-align: center;
+    flex: 1; /* занимает всё доступное пространство */
+}
+
+/* Кнопка справа на detail */
+.title-row.center .title-controls {
+    position: absolute;
+    right: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ====== Поле поиска ====== */
+.search-input {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    background: #222;
+    color: #fff;
+    width: 250px;
+}
+
+/* ====== Иконки ====== */
+.icon-matreshka,
+.icon-back {
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.icon-matreshka:hover,
+.icon-back:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.order-link {
+    position: relative;  /* база для абсолютного позиционирования */
+    display: inline-block;
+}
+
+.order-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.order-count {
+    position: absolute;
+    top: -6px;       /* сдвигаем вверх */
+    right: -6px;     /* сдвигаем вправо */
+    background: #f2d70a;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;   /* делаем круг */
+    min-width: 20px;
+    text-align: center;
+    line-height: 1;
+}
