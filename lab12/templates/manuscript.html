@@ -10,25 +10,22 @@
     <!-- Хедер -->
     <div class="site-header">
         <div class="header-left">
-            <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+            <a href="/">
+                <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+            </a>
         </div>
     </div>
 
     <!-- Заголовок и кнопка "Назад" -->
     <div class="title-row">
         <h1>Ваша рукопись</h1>
-        <div class="title-controls">
-            <a href="/">
-                <img src="http://127.0.0.1:9000/manuscripts/icons8-назад-64.png" alt="Назад" class="icon-back">
-            </a>
-        </div>
     </div>
 
     <!-- Контейнер -->
     <div class="order-container">
 
         <div class="order-period">
-            <h2>Возможный период написания:</h2>
+            <h2>Возможный период написания: 1600–1700 гг</h2>
             <!--<button class="calc-btn">Посчитать</button>-->
         </div>
 
@@ -56,9 +53,6 @@
         {{end}}
     </div>
 
-    <!-- Итоговое количество -->
-    <div class="order-total">
-        <p>Количество признаков: <strong>{{.TotalCount}}</strong></p>
-    </div>
+    
 </body>
 </html>

@@ -22,7 +22,7 @@ func (h *Handler) GetSigns(c *gin.Context) {
 	var signsToShow []repository.Feature
 
 	// Поиск
-	query := c.Query("search")
+	query := c.Query("record")
 	if query != "" {
 		signsToShow, _ = h.repo.SearchFeatures(query)
 	} else {
