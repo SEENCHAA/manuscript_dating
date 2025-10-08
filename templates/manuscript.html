@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Рукопись</title>
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="/styles/order.css">
+</head>
+<body>
+    <!-- Хедер -->
+    <div class="site-header">
+        <div class="header-left">
+            <a href="/signs">
+                <img src="http://127.0.0.1:9000/manuscripts/british-museum-logo.svg" alt="Логотип" class="logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- Заголовок и кнопка "Назад" -->
+    <div class="title-row">
+        <h1>Ваша рукопись</h1>
+    </div>
+
+    <!-- Контейнер -->
+    <div class="order-container">
+
+        <!-- Верхний прямоугольный блок -->
+        <div class="order-period">
+            <h2>Возможный период написания:</h2>
+            <button class="calc-btn">Посчитать</button>
+        </div>
+
+        <!-- Список карточек -->
+        {{if .Manuscript.Letters}}
+            {{range .Manuscript.Letters}}
+                <div class="order-card">
+                    <div class="order-info">
+                        <img src="{{.Letter.ImageURL}}" alt="{{.Letter.Name}}">
+                        <div class="order-text">
+                            <h3>{{.Letter.Name}}</h3>
+                            <p>{{.Letter.Description}}</p>
+                        </div>
+                    </div>
+                    <form method="POST" action="/manuscript/update/{{.Letter.ID}}" class="count-form">
+                        <input type="number" name="quantity" value="{{.Quantity}}" min="1" class="count-input">
+                        <button type="submit" class="update-btn">Обновить</button>
+                    </form>
+                    <form method="POST" action="/manuscript/remove/{{.Letter.ID}}">
+                        <input type="hidden" name="letter_id" value="{{.Letter.ID}}">
+                        <button type="submit" class="delete-btn">
+                        <img src="http://127.0.0.1:9000/manuscripts/icons8-мусорка-50.png" alt="Удалить" class="delete-icon">
+                    </button>
+                </form>
+                </div>
+            {{end}}
+        {{else}}
+            <div class="order-empty" style="width: 1400px; padding: 20px; color: #B6BCBF;">
+                Корзина пуста
+            </div>
+        {{end}}
+
+
+
+    </div>
+    <div class="order-total">
+        <form method="POST" action="/manuscript/delete/{{.ManuscriptID}}">
+            <button type="submit" class="delete-btn-main">Удалить заявку</button>
+        </form>
+    </div>
+
+    
+</body>
+</html>
