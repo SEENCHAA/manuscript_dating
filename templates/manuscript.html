@@ -26,9 +26,18 @@
 
         <!-- Верхний прямоугольный блок -->
         <div class="order-period">
-            <h2>Возможный период написания:</h2>
-            <button class="calc-btn">Посчитать</button>
+            <h3>Возможный период написания:</h3>
+            {{if .Manuscript.CalculatedPeriod}}
+                <p class="order-period-value"><strong>{{.Manuscript.CalculatedPeriod}}</strong></p>
+            {{else}}
+                <p class="order-period-value"><em>Необходимо посчитать</em></p>
+            {{end}}
+            <!-- <button class="calc-btn">Посчитать</button> -->
         </div>
+
+
+
+
 
         <!-- Список карточек -->
         {{if .Manuscript.Letters}}

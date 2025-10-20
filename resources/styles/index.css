@@ -88,3 +88,8 @@ button.card-add:hover {
     height: 100%;
     object-fit: cover;
 }
+
+.order-link.disabled {
+    pointer-events: none; /* нельзя кликнуть */
+    opacity: 0.6;         /* тусклая */
+}

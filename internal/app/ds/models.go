@@ -24,13 +24,14 @@ type Letter struct {
 
 // Рукописи (manuscripts)
 type Manuscript struct {
-	ID          uint      `gorm:"primaryKey"`
-	UserID      uint      `gorm:"not null"`
-	Status      string    `gorm:"type:varchar(20);not null;default:'draft'"`
-	CreatedAt   time.Time `gorm:"autoCreateTime"`
-	SubmittedAt *time.Time
-	FinishedAt  *time.Time
-	ModeratorID *uint
+	ID               uint      `gorm:"primaryKey"`
+	UserID           uint      `gorm:"not null"`
+	Status           string    `gorm:"type:varchar(20);not null;default:'draft'"`
+	CreatedAt        time.Time `gorm:"autoCreateTime"`
+	SubmittedAt      *time.Time
+	FinishedAt       *time.Time
+	ModeratorID      *uint
+	CalculatedPeriod string `gorm:"type:varchar(50)"`
 
 	// связи
 	User    User               `gorm:"foreignKey:UserID"`

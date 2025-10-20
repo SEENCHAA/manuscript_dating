@@ -22,15 +22,21 @@
                 <input type="text" class="search-input" name="record" placeholder="Поиск признака..." id="search-input" value="{{.Records}}">
             </form>
 
-            <a href="/manuscript/{{.ManuscriptID}}" class="order-link">
-                <img src="http://127.0.0.1:9000/manuscripts/icons8-матрешка-48.png" alt="Матрешка" class="order-icon">
-                {{if gt .TotalCount 0}}
-                <span class="order-count">{{.TotalCount}}</span>
-                {{end}}
-            </a>
-
+            {{if gt .TotalCount 0}}
+                <!-- Активная корзина -->
+                <a href="/manuscript/{{.ManuscriptID}}" class="order-link">
+                    <img src="http://127.0.0.1:9000/manuscripts/icons8-матрешка-48.png" alt="Матрешка" class="order-icon">
+                    <span class="order-count">{{.TotalCount}}</span>
+                </a>
+            {{else}}
+                <!-- Неактивная корзина -->
+                <a class="order-link disabled">
+                    <img src="http://127.0.0.1:9000/manuscripts/icons8-matryoshka-unaktiv.png" alt="Матрешка неактивна" class="order-icon">
+                </a>
+            {{end}}
         </div>
     </div>
+
 
     <!-- Карточки -->
     <div class="grid">
