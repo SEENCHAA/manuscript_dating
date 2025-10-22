@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: postgres_db
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: manuscript
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+
+    volumes:
+    - postgresdb-data:/var/lib/postgresql/data # <-- ИСПРАВЛЕНО (было lab12_...)
+
+    command: >
+      postgres 
+      -c listen_addresses=*
+      -c port=5432
+
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6380:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass password
+    volumes:
+      - redis-data:/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+  
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8082:8080"
+    depends_on:
+      - db
+
+
+volumes:
+  postgresdb-data:
+    driver: local
+  minio-data:
+    driver: local
+  redis-data:
+    driver: local
+  pgadmin-data:
+    driver: local
+  adminer-data:
+    driver: local
+  # lab12_postgresdb-data: <-- УДАЛЕНО: было лишним/дублирующим
+  #   external: true
