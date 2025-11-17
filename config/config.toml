@@ -1,0 +1,15 @@
+ServiceHost = "0.0.0.0"
+ServicePort = 8081
+
+[JWT]
+Token = "a-very-secret-key-that-should-be-long-enough"
+ExpiresIn = "2h"
+SigningMethod = "HS256"
+
+[Redis]
+Host = "127.0.0.1" # Используйте "redis" если запускаете из другого контейнера
+Port = 6380 # Порт из docker-compose.yml
+Password = "password"
+User = ""
+DialTimeout = "10s"
+ReadTimeout = "10s"

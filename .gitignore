@@ -1,0 +1,28 @@
+# Секреты и конфиги
+.env
+
+# Бинарники Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Кэш Go
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+
+# Папка сборки
+/bin/
+/build/
+/dist/
+
+# IDE/редактор
+.vscode/
+.idea/
+*.iml
